@@ -49,3 +49,24 @@ export const handleSignIn = async (req, res, next) => {
     res.status(400).json({ message: error?.message });
   }
 };
+
+export const handleSignOut = async (req, res, next) => {
+  const cookies = req.cookies;
+  if (!cookies?.jwt) return res.sendStatus(204);
+  const refreshToken = cookies.jwt;
+  try {
+    const user = await User.findOne({ refreshToken });
+
+    if (!user) {
+      res.clearCookie("jwt", { httpOnly: true, maxAge: COOKIE_MAX_AGE });
+      return res.sendStatus(204);
+    }
+
+    await User.findOneAndUpdate({ refreshToken }, { refreshToken: "" });
+
+    res.clearCookie("jwt", { httpOnly: true, maxAge: COOKIE_MAX_AGE }); // TODO: replace httpOnly with secure(https) for prod
+    res.status(204).json({ message: "Signed out successfully" });
+  } catch (error) {
+    res.sendStatus(400);
+  }
+};
