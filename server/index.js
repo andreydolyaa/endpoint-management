@@ -10,6 +10,8 @@ import refreshTokenRoute from "./route/refreshTokenRoute.js";
 import { globalErrorHandler } from "./middleware/error/globalError.js";
 import { invalidPathHandler } from "./middleware/error/invalidPath.js";
 import { verifyToken } from "./middleware/auth/verifyToken.js";
+import { credentials } from "./middleware/auth/credentials.js";
+import { corsOptions } from "./config/corsOptions.js";
 
 dotenv.config();
 
@@ -22,7 +24,9 @@ db.connect().catch((err) => {
   console.error("Error connection to database", err);
 });
 
-app.use(cors());
+app.use(credentials); // for cors
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());

@@ -1,6 +1,7 @@
 import { generateAccessToken } from "../middleware/auth/generateAccessToken.js";
 import { generateRefreshToken } from "../middleware/auth/generateRefreshToken.js";
 import { addRefreshTokenToUser } from "../middleware/auth/storeRefreshToken.js";
+import { generateUserForJwt, userRoles } from "../config/userRoles.js";
 import { User } from "../model/userModel.js";
 import bcrypt from "bcrypt";
 
@@ -13,6 +14,7 @@ export const handleSignUp = async (req, res) => {
     name,
     email,
     password: hashedPassword,
+    role: userRoles.USER, // TODO: Temporary every new user sets to USER
   });
 
   try {
@@ -32,12 +34,14 @@ export const handleSignIn = async (req, res, next) => {
     } else {
       const validated = await bcrypt.compare(password, user.password);
       if (validated) {
-        const userData = { name: user.name, id: user.id, email: user.email };
-        const accessToken = generateAccessToken(userData);
+        const userData = generateUserForJwt(user);
+        const accessToken = generateAccessToken(userData); // Should be stored in memory!
         const refreshToken = generateRefreshToken(user.id);
         await addRefreshTokenToUser(user, refreshToken);
         res.cookie("jwt", refreshToken, {
           httpOnly: true,
+          sameSite: "None",
+          secure: true,
           maxAge: COOKIE_MAX_AGE,
         });
         return res.status(200).json({ accessToken });
@@ -58,13 +62,17 @@ export const handleSignOut = async (req, res, next) => {
     const user = await User.findOne({ refreshToken });
 
     if (!user) {
-      res.clearCookie("jwt", { httpOnly: true, maxAge: COOKIE_MAX_AGE });
+      res.clearCookie("jwt", {
+        httpOnly: true,
+        sameSite: "None",
+        secure: true,
+      });
       return res.sendStatus(204);
     }
 
     await User.findOneAndUpdate({ refreshToken }, { refreshToken: "" });
 
-    res.clearCookie("jwt", { httpOnly: true, maxAge: COOKIE_MAX_AGE }); // TODO: replace httpOnly with secure(https) for prod
+    res.clearCookie("jwt", { httpOnly: true, sameSite: "None", secure: true });
     res.status(204).json({ message: "Signed out successfully" });
   } catch (error) {
     res.sendStatus(400);
