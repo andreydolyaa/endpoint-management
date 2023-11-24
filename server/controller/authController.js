@@ -1,7 +1,8 @@
 import { generateAccessToken } from "../middleware/auth/generateAccessToken.js";
 import { generateRefreshToken } from "../middleware/auth/generateRefreshToken.js";
 import { addRefreshTokenToUser } from "../middleware/auth/storeRefreshToken.js";
-import { generateUserForJwt, userRoles } from "../config/userRoles.js";
+import { userRoles } from "../config/userRoles.js";
+import { generateUserForJwt } from "../utils/index.js";
 import { User } from "../model/userModel.js";
 import bcrypt from "bcrypt";
 
