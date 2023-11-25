@@ -70,7 +70,9 @@ function Login() {
           </div>
           <button className="text-3xl">Login</button>
           <div className="no-account">Don't have an account? Register!</div>
-          {error && <div className="error">{error}</div>}
+          <div className="error">
+            {error && <div className="animate">{error}</div>}
+          </div>
         </form>
       </div>
     </div>
