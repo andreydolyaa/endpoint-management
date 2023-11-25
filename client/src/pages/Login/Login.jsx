@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, clearError } from "../../redux/user/userActions";
 import AuthContext from "../../context/AuthProvider";
+import { FiMail, FiLock, FiAlertCircle } from "react-icons/fi";
 
 function Login() {
   const dispatch = useDispatch();
@@ -43,24 +44,38 @@ function Login() {
     <div className="auth">
       <div className="wrapper">
         <h1>Login</h1>
+        <div className="error">
+            {error && (
+              <div className="animate">
+                <FiAlertCircle className="icon" />
+                {error}
+              </div>
+            )}
+          </div>
         <form onSubmit={submitLoginForm}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-            ref={emailRef}
-            value={credentials?.email}
-            onChange={handleCredentials}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-            value={credentials?.password}
-            onChange={handleCredentials}
-          />
+          <div className="input-wrapper">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              ref={emailRef}
+              value={credentials?.email}
+              onChange={handleCredentials}
+            />
+            <FiMail className="icon" />
+          </div>
+          <div className="input-wrapper">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              value={credentials?.password}
+              onChange={handleCredentials}
+            />
+            <FiLock className="icon" />
+          </div>
           <div className="info">
             <div className="remember">
               <input type="checkbox" className="remember-input" />
@@ -70,9 +85,6 @@ function Login() {
           </div>
           <button className="text-3xl">Login</button>
           <div className="no-account">Don't have an account? Register!</div>
-          <div className="error">
-            {error && <div className="animate">{error}</div>}
-          </div>
         </form>
       </div>
     </div>
