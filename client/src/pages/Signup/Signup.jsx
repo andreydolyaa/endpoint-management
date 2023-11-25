@@ -1,56 +1,62 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signUp } from "../../redux/signup/signupActions";
 
 function Signup() {
   const dispatch = useDispatch();
-  const { status, loading, error } = useSelector((state) => state.signup);
-  const [formData, setFormData] = useState({
-    name: "mike",
-    email: "mike@mail.com",
-    password: "123",
+  const [userDetails, setUserDetails] = useState({
+    name: "",
+    email: "",
+    password: "",
   });
 
-  const handleInputChange = (e) => {
+  const handleUserDetails = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setUserDetails({ ...userDetails, [name]: value });
   };
 
-  const handleSignup = (e) => {
+  const handleSignupSubmit = (e) => {
     e.preventDefault();
-    dispatch(signUp(formData));
+    dispatch(signUp(userDetails));
   };
 
   return (
-    <>
-      {error && <div>{error}</div>}
-      {status && <div>{status}</div>}
-      {loading && <div>Loading</div>}
-      <form onSubmit={handleSignup}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleInputChange}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        <button>Sign Up</button>
-      </form>
-    </>
+    <div className="auth">
+      <div className="wrapper">
+        {/* <div className="blur">d</div> */}
+        <h1>Signup</h1>
+        <form onSubmit={handleSignupSubmit}>
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            required
+            className="input"
+            value={userDetails.name}
+            onChange={handleUserDetails}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            required
+            className="input"
+            value={userDetails.email}
+            onChange={handleUserDetails}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+            className="input"
+            value={userDetails.password}
+            onChange={handleUserDetails}
+          />
+          <button className="button">Signup</button>
+        </form>
+      </div>
+    </div>
   );
 }
 

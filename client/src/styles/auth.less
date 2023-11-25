@@ -1,0 +1,72 @@
+.auth {
+  height: 100%;
+  background-image: url("../assets/pictures/peakpx.jpeg");
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .wrapper {
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+    background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 35px;
+    h1 {
+      font-size: 38px;
+      margin: 0 0 25px 0;
+
+      color: #fff;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      button {
+        background-color: #fff;
+        border: none;
+        font-size: 16px;
+        margin: 0 0 25px 0;
+      }
+      input {
+        margin: 0 0 25px 0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background-color: transparent;
+        color: white;
+        outline: none;
+      }
+      input::placeholder {
+        color: rgb(255, 255, 255);
+      }
+      input,
+      button {
+        padding: 15px;
+        border-radius: 25px;
+        cursor: pointer;
+      }
+      .info {
+        margin: 0 0 25px 0;
+        color: #ffffff;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .remember {
+          .remember-input {
+            margin: 0 5px 0 0;
+          }
+          display: flex;
+        }
+      }
+      .no-account {
+        font-size: 12px;
+        color: white;
+      }
+    }
+  }
+}

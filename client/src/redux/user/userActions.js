@@ -1,12 +1,12 @@
 import * as actions from "./userTypes";
 import api from "../../api/api";
 
-export const signIn = (credentials) => {
+export const login = (credentials) => {
   return async (dispatch) => {
     dispatch({ type: actions.SIGN_IN_REQUEST });
 
     try {
-      const response = await api.post("/user/signin", credentials);
+      const response = await api.post("/auth/signin", credentials);
       const data = response.data;
 
       dispatch({

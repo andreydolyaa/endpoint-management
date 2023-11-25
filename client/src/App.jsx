@@ -1,13 +1,13 @@
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
-import Signin from "./pages/Signin/Signin";
 
 function App() {
   return (
     <Provider store={store}>
-      <Signup />
-      <Signin />
+      {/* <Signup /> */}
+      <Login />
     </Provider>
   );
 }

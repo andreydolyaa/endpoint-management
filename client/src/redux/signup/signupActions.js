@@ -5,7 +5,7 @@ export const signUp = (credentials) => {
   return async (dispatch) => {
     dispatch({ type: actions.SIGN_UP_REQUEST });
     try {
-      const response = await api.post("/user/signup", credentials);
+      const response = await api.post("/auth/signup", credentials);
       const { message = "" } = response.data;
 
       dispatch({ type: actions.SIGN_UP_SUCCESS, payload: { status: message } });
