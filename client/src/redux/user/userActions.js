@@ -19,3 +19,10 @@ export const login = (credentials) => {
     }
   };
 };
+
+export const clearError = () => {
+  return {
+    type: actions.CLEAR_ERROR,
+    payload: {},
+  };
+};

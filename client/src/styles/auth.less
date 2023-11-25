@@ -27,6 +27,7 @@
     form {
       display: flex;
       flex-direction: column;
+      font-size: 12px;
       button {
         background-color: #fff;
         border: none;
@@ -38,11 +39,11 @@
         border: 1px solid rgba(255, 255, 255, 0.2);
         background-color: transparent;
         color: white;
-        outline: none;
       }
       input::placeholder {
         color: rgb(255, 255, 255);
       }
+
       input,
       button {
         padding: 15px;
@@ -52,7 +53,6 @@
       .info {
         margin: 0 0 25px 0;
         color: #ffffff;
-        font-size: 12px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -64,8 +64,17 @@
         }
       }
       .no-account {
-        font-size: 12px;
         color: white;
+      }
+      .error {
+        margin: 25px 0 0 0;
+        color: rgb(255, 144, 160);
+        // font-weight: 600;
+        // font-size: 14px;
+      }
+      .loading {
+        margin: 25px 0 0 0;
+        color: rgb(255, 255, 255);
       }
     }
   }

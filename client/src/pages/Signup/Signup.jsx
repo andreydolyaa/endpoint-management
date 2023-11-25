@@ -23,7 +23,6 @@ function Signup() {
   return (
     <div className="auth">
       <div className="wrapper">
-        {/* <div className="blur">d</div> */}
         <h1>Signup</h1>
         <form onSubmit={handleSignupSubmit}>
           <input

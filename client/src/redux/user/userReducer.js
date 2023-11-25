@@ -31,6 +31,11 @@ const signinReducer = (state = initialState, action) => {
         loading: false,
         error: payload.error,
       };
+    case actions.CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
+      };
     default:
       return state;
   }

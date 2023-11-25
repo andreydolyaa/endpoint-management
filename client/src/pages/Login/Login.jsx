@@ -1,13 +1,24 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../redux/user/userActions";
+import { useRef, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login, clearError } from "../../redux/user/userActions";
 
 function Login() {
   const dispatch = useDispatch();
+  const emailRef = useRef(null);
+  const error = useSelector((state) => state.user.error);
+  const loading = useSelector((state) => state.user.loading);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [credentials.email, credentials.password]);
 
   const handleCredentials = (e) => {
     const { value, name } = e.target;
@@ -30,6 +41,7 @@ function Login() {
             name="email"
             placeholder="Email"
             required
+            ref={emailRef}
             value={credentials?.email}
             onChange={handleCredentials}
           />
@@ -49,9 +61,9 @@ function Login() {
             <a href="">Forgot Password?</a>
           </div>
           <button className="text-3xl">Login</button>
-          <div className="no-account">
-            Don't have an account? Register!
-          </div>
+          <div className="no-account">Don't have an account? Register!</div>
+          {loading && <div className="loading">Loading...</div>}
+          {error && <div className="error">{error}</div>}
         </form>
       </div>
     </div>
