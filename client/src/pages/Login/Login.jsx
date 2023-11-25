@@ -1,12 +1,14 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login, clearError } from "../../redux/user/userActions";
+import AuthContext from "../../context/AuthProvider";
 
 function Login() {
   const dispatch = useDispatch();
+  const { setAuth } = useContext(AuthContext);
   const emailRef = useRef(null);
+  const user = useSelector((state) => state.user.user);
   const error = useSelector((state) => state.user.error);
-  const loading = useSelector((state) => state.user.loading);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -19,6 +21,12 @@ function Login() {
   useEffect(() => {
     dispatch(clearError());
   }, [credentials.email, credentials.password]);
+
+  useEffect(() => {
+    if (user) {
+      setAuth({ ...user });
+    }
+  }, [user]);
 
   const handleCredentials = (e) => {
     const { value, name } = e.target;
@@ -62,7 +70,6 @@ function Login() {
           </div>
           <button className="text-3xl">Login</button>
           <div className="no-account">Don't have an account? Register!</div>
-          {loading && <div className="loading">Loading...</div>}
           {error && <div className="error">{error}</div>}
         </form>
       </div>

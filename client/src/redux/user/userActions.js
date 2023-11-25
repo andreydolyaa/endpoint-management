@@ -11,7 +11,7 @@ export const login = (credentials) => {
 
       dispatch({
         type: actions.SIGN_IN_SUCCESS,
-        payload: { accessToken: data?.accessToken },
+        payload: { user: data },
       });
     } catch (error) {
       const message = error?.response?.data?.message || error?.message;
@@ -23,6 +23,6 @@ export const login = (credentials) => {
 export const clearError = () => {
   return {
     type: actions.CLEAR_ERROR,
-    payload: {},
+    payload: {}
   };
 };

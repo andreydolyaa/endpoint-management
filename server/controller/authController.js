@@ -45,7 +45,15 @@ export const handleSignIn = async (req, res, next) => {
           secure: true,
           maxAge: COOKIE_MAX_AGE,
         });
-        return res.status(200).json({ accessToken });
+        return res
+          .status(200)
+          .json({
+            accessToken,
+            name: user.name,
+            role: user.role,
+            id: user.id,
+            email: user.email,
+          });
       } else {
         throw new Error("Wrong credentials");
       }

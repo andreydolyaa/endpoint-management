@@ -1,7 +1,7 @@
 import * as actions from "./userTypes";
 
 const initialState = {
-  accessToken: null,
+  user:null,
   loading: false,
   error: null,
 };
@@ -13,21 +13,21 @@ const signinReducer = (state = initialState, action) => {
     case actions.SIGN_IN_REQUEST:
       return {
         ...state,
-        accessToken: null,
+        user: null,
         loading: true,
         error: null,
       };
     case actions.SIGN_IN_SUCCESS:
       return {
         ...state,
-        accessToken: payload.accessToken,
+        user: payload.user,
         loading: false,
         error: null,
       };
     case actions.SIGN_IN_FAILED:
       return {
         ...state,
-        accessToken: null,
+        user: null,
         loading: false,
         error: payload.error,
       };
