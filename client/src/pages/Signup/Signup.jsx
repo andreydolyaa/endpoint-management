@@ -1,14 +1,20 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { signUp } from "../../redux/signup/signupActions";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearSignupError, signUp } from "../../redux/signup/signupActions";
+import { FiMail, FiLock, FiAlertCircle, FiUser } from "react-icons/fi";
 
 function Signup() {
   const dispatch = useDispatch();
+  const error = useSelector((state) => state.signup.error);
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    dispatch(clearSignupError());
+  }, [userDetails.email, userDetails.password, userDetails.name]);
 
   const handleUserDetails = (e) => {
     const { name, value } = e.target;
@@ -18,40 +24,58 @@ function Signup() {
   const handleSignupSubmit = (e) => {
     e.preventDefault();
     dispatch(signUp(userDetails));
+    setUserDetails({ name: "", email: "", password: "" });
   };
 
   return (
     <div className="auth">
       <div className="wrapper">
         <h1>Signup</h1>
+        <div className="error">
+          {error && (
+            <div className="animate">
+              <FiAlertCircle className="icon" />
+              {error}
+            </div>
+          )}
+        </div>
         <form onSubmit={handleSignupSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            required
-            className="input"
-            value={userDetails.name}
-            onChange={handleUserDetails}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-            className="input"
-            value={userDetails.email}
-            onChange={handleUserDetails}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-            className="input"
-            value={userDetails.password}
-            onChange={handleUserDetails}
-          />
+          <div className="input-wrapper">
+            <input
+              type="text"
+              name="name"
+              placeholder="Full Name"
+              required
+              className="input"
+              value={userDetails.name}
+              onChange={handleUserDetails}
+            />
+            <FiUser className="icon" />
+          </div>
+          <div className="input-wrapper">
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              className="input"
+              value={userDetails.email}
+              onChange={handleUserDetails}
+            />
+            <FiMail className="icon" />
+          </div>
+          <div className="input-wrapper">
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+              className="input"
+              value={userDetails.password}
+              onChange={handleUserDetails}
+            />
+            <FiLock className="icon" />
+          </div>
           <button className="button">Signup</button>
         </form>
       </div>

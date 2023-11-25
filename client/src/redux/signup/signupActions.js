@@ -15,3 +15,11 @@ export const signUp = (credentials) => {
     }
   };
 };
+
+
+export const clearSignupError = () => {
+  return {
+    type: actions.CLEAR_SIGNUP_ERROR,
+    payload: {}
+  };
+};
