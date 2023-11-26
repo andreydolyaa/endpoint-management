@@ -28,7 +28,10 @@ class WsServer {
     const sessions = Object.keys(this.clients) || [];
     // TODO: handle message validation and sanitazation
     if (!incoming.sessionId || !sessions.includes(incoming.sessionId)) {
-      this.send(socket, "Failed to identify session!");
+      this.send(socket, {
+        type: "error",
+        message: "Failed to identify session!",
+      });
       socket.close();
       return;
     }
