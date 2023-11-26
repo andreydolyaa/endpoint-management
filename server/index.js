@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import http from "http";
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
@@ -12,10 +13,13 @@ import { invalidPathHandler } from "./middleware/error/invalidPath.js";
 import { verifyToken } from "./middleware/auth/verifyToken.js";
 import { credentials } from "./middleware/auth/credentials.js";
 import { corsOptions } from "./config/corsOptions.js";
+import WebSocketServer from "./websocket/websocketServer.js";
 
 dotenv.config();
 
 const app = express();
+const server = http.createServer(app);
+const wsServer = new WebSocketServer(server);
 
 const PORT = process.env.PORT || 3005;
 const db = new Database(`${process.env.MONGODB_URI}/auth-project-db`);
@@ -43,11 +47,14 @@ process.on("SIGINT", async () => {
   try {
     await db.disconnect();
     console.log("Disconnected from database");
-    process.exit(0);
+    server.close(() => {
+      console.log("HTTP server closed");
+      process.exit(0);
+    });
   } catch (error) {
     console.error(error);
     process.exit(1);
   }
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
