@@ -11,19 +11,21 @@ class WsServer {
   setupWebSocket() {
     console.log("Websocket server started");
     this.wss.on(action.CONNECTION, (socket) => {
-      this.connection(socket);
-      socket.on(action.MESSAGE, (message) => this.onmessage(message, socket));
-      socket.on(action.ERROR, (error) => this.onerror(error, socket));
-      socket.on(action.CLOSE, () => this.onclose(socket));
+      this.handleConnection(socket);
+      socket.on(action.MESSAGE, (message) =>
+        this.handleIncomingMessage(message, socket)
+      );
+      socket.on(action.ERROR, (error) => this.handleError(error, socket));
+      socket.on(action.CLOSE, () => this.handleConnectionClose(socket));
     });
   }
-  connection(socket) {
+  handleConnection(socket) {
     const sessionId = uuidv4();
     this.clients[sessionId] = socket;
     this.logConnectionsStatus(sessionId, true);
     this.send(socket, { type: "session", sessionId });
   }
-  onmessage(message, socket) {
+  handleIncomingMessage(message, socket) {
     const incoming = JSON.parse(message);
     const sessions = Object.keys(this.clients) || [];
     // TODO: handle message validation and sanitazation
@@ -37,12 +39,12 @@ class WsServer {
     }
     console.log(`Incoming Message: ${message}`);
   }
-  onerror(error) {
+  handleError(error) {
     console.log(error);
     socket.close();
     return;
   }
-  onclose(socket) {
+  handleConnectionClose(socket) {
     const sessionId = this.findSession(socket);
     delete this.clients[sessionId];
     this.logConnectionsStatus(sessionId, false);

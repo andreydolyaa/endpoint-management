@@ -2,12 +2,12 @@ class Session {
   constructor() {
     this.sessionId = null;
   }
-  static saveSessionId(sessionId) {
+  static set store(sessionId) {
     this.sessionId = sessionId;
   }
-  static getSessionId() {
+  static get retrieve() {
     return this.sessionId;
   }
 }
 
-export default Session
+export default Session;

@@ -1,4 +1,7 @@
 export const messageTypes = {
   SESSION: "session",
-  ERROR: "error"
-}
+  ERROR: "error",
+  OPEN: "open",
+  CLOSE: "close",
+  MESSAGE: "message",
+};
