@@ -11,7 +11,7 @@ class WsServer {
   setupWebSocket() {
     console.log("Websocket server started");
     this.wss.on(action.CONNECTION, (socket) => {
-      this.handleConnection(socket);
+      this.handleConnectionOpen(socket);
       socket.on(action.MESSAGE, (message) =>
         this.handleIncomingMessage(message, socket)
       );
@@ -19,7 +19,7 @@ class WsServer {
       socket.on(action.CLOSE, () => this.handleConnectionClose(socket));
     });
   }
-  handleConnection(socket) {
+  handleConnectionOpen(socket) {
     const sessionId = uuidv4();
     this.clients[sessionId] = socket;
     this.logConnectionsStatus(sessionId, true);

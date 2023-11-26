@@ -2,45 +2,45 @@ import os from "os";
 
 class Device {
   constructor() {}
-  static sendDeviceIdentifier() {
+  static get getDeviceIdentifier() {
     return {
       deviceIdentifier: process.env.DEVICE_IDENTIFIER,
-      osVersion: this.osVersion,
-      userInfo: this.userInfo,
-      upTime: this.upTime,
-      totalMemory: this.totalMemory,
-      freeMemory: this.freeMemory,
-      osRelease: this.osRelease,
-      machineType: this.machineType,
-      hostName: this.hostName,
-      homeDir: this.homeDir,
+      osVersion: this.osVersion(),
+      userInfo: this.userInfo(),
+      upTime: this.upTime(),
+      totalMemory: this.totalMemory(),
+      freeMemory: this.freeMemory(),
+      osRelease: this.osRelease(),
+      machineType: this.machineType(),
+      hostName: this.hostName(),
+      homeDir: this.homeDir(),
     };
   }
-  get osVersion() {
+  static osVersion() {
     return os.version();
   }
-  get userInfo() {
+  static userInfo() {
     return os.userInfo();
   }
-  get upTime() {
+  static upTime() {
     return os.uptime();
   }
-  get totalMemory() {
+  static totalMemory() {
     return os.totalmem();
   }
-  get freeMemory() {
+  static freeMemory() {
     return os.freemem();
   }
-  get osRelease() {
+  static osRelease() {
     return os.release();
   }
-  get machineType() {
+  static machineType() {
     return os.machine();
   }
-  get hostName() {
+  static hostName() {
     return os.hostname();
   }
-  get homeDir() {
+  static homeDir() {
     return os.homedir();
   }
 }
