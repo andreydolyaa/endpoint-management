@@ -1,7 +1,7 @@
 import * as actions from "./userTypes";
 
 const initialState = {
-  user:null,
+  user: null,
   loading: false,
   error: null,
 };

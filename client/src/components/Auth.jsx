@@ -5,7 +5,7 @@ const Auth = () => {
   const { auth } = useAuth();
   const location = useLocation();
 
-  return auth?.user ? (
+  return Object.keys(auth).length > 0 ? (
     <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />

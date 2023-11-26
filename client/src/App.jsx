@@ -20,7 +20,7 @@ function App() {
 
         {/* protected routes */}
         <Route element={<Auth />}>
-          <Route path="/" element={<Home />} />
+          <Route path="home" element={<Home />} />
         </Route>
 
         {/* wrong path */}

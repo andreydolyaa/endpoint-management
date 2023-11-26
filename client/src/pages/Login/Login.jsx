@@ -1,15 +1,19 @@
 import { useRef, useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, clearError } from "../../redux/user/userActions";
 import { FiMail, FiLock, FiAlertCircle } from "react-icons/fi";
 import useAuth from "../../hooks/useAuth";
+import Loader from "../../components/Loader";
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { setAuth } = useAuth();
   const emailRef = useRef(null);
   const user = useSelector((state) => state.user.user);
   const error = useSelector((state) => state.user.error);
+  const loading = useSelector((state) => state.user.loading);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -17,17 +21,15 @@ function Login() {
 
   useEffect(() => {
     emailRef.current.focus();
-  }, []);
+    if (user) {
+      setAuth(user);
+      navigate("/home");
+    }
+  }, [user]);
 
   useEffect(() => {
     dispatch(clearError());
   }, [credentials.email, credentials.password]);
-
-  useEffect(() => {
-    if (user) {
-      setAuth({ ...user });
-    }
-  }, [user]);
 
   const handleCredentials = (e) => {
     const { value, name } = e.target;
@@ -90,7 +92,14 @@ function Login() {
               </div>
               <a href="">Forgot Password?</a>
             </div>
-            <button className="text-3xl">Login</button>
+            {loading ? (
+              <div className="loader">
+                <Loader />
+              </div>
+            ) : (
+              <button className="text-3xl">Login</button>
+            )}
+
             <a href="/signup">Don't have an account? Signup!</a>
           </form>
         </div>
