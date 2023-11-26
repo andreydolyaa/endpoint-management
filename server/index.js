@@ -22,6 +22,7 @@ const server = http.createServer(app);
 const wsServer = new WebSocketServer(server);
 
 const PORT = process.env.PORT || 3005;
+const HOST = process.env.HOST || "localhost";
 const db = new Database(`${process.env.MONGODB_URI}/auth-project-db`);
 
 db.connect().catch((err) => {
@@ -57,4 +58,6 @@ process.on("SIGINT", async () => {
   }
 });
 
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, HOST, () =>
+  console.log(`Server running on port http://${HOST}:${PORT}`)
+);

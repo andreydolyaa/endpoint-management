@@ -12,7 +12,7 @@ class WebSocketClient {
     this.reconnectTime = 3000;
     this.handleIncomingMessage = this.handleIncomingMessage.bind(this);
     this.handleError = this.handleError.bind(this);
-    this.connectionClose = this.connectionClose.bind(this);
+    this.handleConnectionClose = this.handleConnectionClose.bind(this);
     this.setupWebsocket();
   }
   setupWebsocket() {
