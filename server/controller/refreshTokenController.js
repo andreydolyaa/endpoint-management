@@ -24,7 +24,13 @@ export const handleRefreshToken = async (req, res, next) => {
         // If refresh token is valid, generate new access token
         const userData = generateUserForJwt(user);
         const accessToken = generateAccessToken(userData);
-        res.status(200).json({ accessToken });
+        res.status(200).json({
+          accessToken,
+          name: user.name,
+          role: user.role,
+          id: user.id,
+          email: user.email,
+        });
       }
     );
   } catch (error) {

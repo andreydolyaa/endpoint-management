@@ -31,6 +31,11 @@ const signinReducer = (state = initialState, action) => {
         loading: false,
         error: payload.error,
       };
+    case actions.REFRESH_TOKEN:
+      return {
+        ...state,
+        user: payload.user,
+      };
     case actions.CLEAR_ERROR:
       return {
         ...state,

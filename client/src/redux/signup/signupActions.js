@@ -1,5 +1,5 @@
 import * as actions from "./signupTypes";
-import api from "../../api/api";
+import api from "../../api/axios";
 
 export const signUp = (credentials) => {
   return async (dispatch) => {

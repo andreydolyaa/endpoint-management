@@ -41,9 +41,10 @@ export const handleSignIn = async (req, res, next) => {
         await addRefreshTokenToUser(user, refreshToken);
         res.cookie("jwt", refreshToken, {
           httpOnly: true,
+          maxAge: COOKIE_MAX_AGE,
+          //TODO: enable sameSite & secure on HTTPS
           sameSite: "None",
           secure: true,
-          maxAge: COOKIE_MAX_AGE,
         });
         return res.status(200).json({
           accessToken,
@@ -71,6 +72,7 @@ export const handleSignOut = async (req, res, next) => {
     if (!user) {
       res.clearCookie("jwt", {
         httpOnly: true,
+        //TODO: enable sameSite & secure on HTTPS
         sameSite: "None",
         secure: true,
       });

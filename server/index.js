@@ -1,5 +1,6 @@
+import fs from "fs";
 import dotenv from "dotenv";
-import http from "http";
+import https from "https";
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
@@ -17,8 +18,13 @@ import WebSocketServer from "./websocket/websocketServer.js";
 
 dotenv.config();
 
+const serverOptions = {
+  key: fs.readFileSync("./certs/server.key"),
+  cert: fs.readFileSync("./certs/server.cert"),
+};
+
 const app = express();
-const server = http.createServer(app);
+const server = https.createServer(serverOptions, app);
 const wsServer = new WebSocketServer(server);
 
 const PORT = process.env.PORT || 3005;
@@ -59,5 +65,5 @@ process.on("SIGINT", async () => {
 });
 
 server.listen(PORT, HOST, () =>
-  console.log(`Server running on port http://${HOST}:${PORT}`)
+  console.log(`Server running on port https://${HOST}:${PORT}`)
 );
