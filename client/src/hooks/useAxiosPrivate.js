@@ -7,20 +7,42 @@ const useAxiosPrivate = () => {
   const refresh = useRefreshToken();
   const { auth } = useAuth();
 
+  useEffect(() => {
+    const requestIntercept = axiosPrivate.interceptors.request.use(
+      (config) => {
+        if (!config.headers["Authorization"]) {
+          config.headers["Authorization"] = `Bearer ${auth?.user?.accessToken}`;
+        }
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
 
-  // useEffect(() => {
-    
-  //   const responseInterceptors = axiosPrivate.interceptors.response(response => response, async (error) => {
-  //     const prevRequest = error?.config;
-  //     if ((error?.response?.status === 403 || error?.response?.status === 401) && !prevRequest?.send) {
-  //       prevRequest.send = true;
-  //       await refresh();
-  //       const newAccessToken = auth;
-  //       console.log(newAccessToken);
-  //     }
-  //   })
-  // }, [auth, refresh]);
-  
+    const responseIntercept = axiosPrivate.interceptors.response.use(
+      (response) => response,
+      async (error) => {
+        const request = error?.config;
+        if (
+          (error?.response?.status === 403 ||
+            error?.response?.status === 401) &&
+          !request?.sent
+        ) {
+          request.sent = true;
+          const userWithNewAccessToken = await refresh();
+          const { accessToken } = userWithNewAccessToken || {};
+          request.headers["Authorization"] = `Bearer ${accessToken}`;
+          return axiosPrivate(request);
+        }
+        return Promise.reject(error);
+      }
+    );
+    return () => {
+      axiosPrivate.interceptors.request.eject(requestIntercept);
+      axiosPrivate.interceptors.response.eject(responseIntercept);
+    };
+  }, [auth, refresh]);
+
+  return axiosPrivate;
 };
 
 export default useAxiosPrivate;

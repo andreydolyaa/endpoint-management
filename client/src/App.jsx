@@ -8,6 +8,8 @@ import Home from "./pages/Home/Home";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import Missing from "./pages/Missing/Missing";
 import Auth from "./components/Auth";
+import Products from "./pages/Products/Products";
+import Settings from "./pages/Settings/Settings";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         {/* protected routes */}
         <Route element={<Auth />}>
           <Route path="home" element={<Home />} />
+          <Route path="products" element={<Products />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
 
         {/* wrong path */}

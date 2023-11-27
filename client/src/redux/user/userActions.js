@@ -20,24 +20,9 @@ export const login = (credentials) => {
   };
 };
 
-// export const refreshToken = () => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await api.get("/refresh");
-//       const data = response.data;
-//       dispatch({
-//         type: actions.REFRESH_TOKEN,
-//         payload: { user: data },
-//       });
-//       return data;
-//     } catch (error) {
-//       dispatch({ type: actions.SIGN_IN_FAILED, payload: { error: message } });
-//     }
-//   };
-// };
-export const refreshToken = (user) => {
+export const setNewUserAfterRefreshToken = (user) => {
   return {
-    type: actions.REFRESH_TOKEN,
+    type: actions.SIGN_IN_SUCCESS,
     payload: user,
   };
 };

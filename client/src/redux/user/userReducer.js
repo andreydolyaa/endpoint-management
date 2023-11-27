@@ -6,6 +6,7 @@ const initialState = {
   error: null,
 };
 
+
 const signinReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
