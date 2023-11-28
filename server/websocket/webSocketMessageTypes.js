@@ -1,0 +1,4 @@
+export const webSocketMessageTypes = {
+  INITIAL_CONNECTION: "INITIAL_CONNECTION",
+  UPDATE_MESSAGE: "UPDATE_MESSAGE",
+};

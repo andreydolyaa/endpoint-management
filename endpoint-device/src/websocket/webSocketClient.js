@@ -65,6 +65,8 @@ class WebSocketClient {
     } else if (message.type === action.SESSION) {
       Session.store = message.sessionId;
       this.sendInitMessage();
+    } else if (message.type === action.MESSAGE) {
+      console.log(message);
     }
   }
   send(message) {
@@ -78,7 +80,16 @@ class WebSocketClient {
     this.send(
       JSON.stringify({
         type: center.INITIAL_CONNECTION,
-        device: Device.getDeviceIdentifier,
+        deviceIdentifier: Device.deviceIdentifier,
+        osVersion: Device.osVersion,
+        userInfo: Device.userInfo,
+        upTime: Device.upTime,
+        totalMemory: Device.totalMemory,
+        freeMemory: Device.freeMemory,
+        osRelease: Device.osRelease,
+        machineType: Device.machineType,
+        hostName: Device.hostName,
+        homeDir: Device.homeDir,
         sessionId: Session.retrieve,
       })
     );

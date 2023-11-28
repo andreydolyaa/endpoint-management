@@ -30,7 +30,7 @@ const serverOptions = {
 
 const app = express();
 const server = https.createServer(serverOptions, app);
-const wsServer = new WebSocketServer(server);
+export const wsServer = new WebSocketServer(server);
 
 const PORT = process.env.PORT || 3005;
 const HOST = process.env.HOST || "localhost";

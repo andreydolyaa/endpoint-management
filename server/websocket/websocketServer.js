@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { WebSocketServer } from "ws";
 import { webSocketActions as action } from "./webSocketConstants.js";
+import { handleIncomingWebSocketMessages } from "./webSocketIncomingMessages.js";
 
 class WsServer {
   constructor(server) {
@@ -37,7 +38,8 @@ class WsServer {
       socket.close();
       return;
     }
-    console.log(`Incoming Message: ${message}`);
+    // console.log(`Incoming Message: ${message}`);
+    handleIncomingWebSocketMessages(incoming);
   }
   handleError(error) {
     console.log(error);
@@ -67,6 +69,11 @@ class WsServer {
     const msg = JSON.stringify(message);
     if (socket) socket.send(msg);
     else Object.values(this.clients).forEach((client) => client.send(msg));
+  }
+  sendMessage(sessionId, message) {
+    const msg = JSON.stringify({ type: "message", message });
+    const socket = this.clients[sessionId];
+    socket.send(msg);
   }
 }
 
