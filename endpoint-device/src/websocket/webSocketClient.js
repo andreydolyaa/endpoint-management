@@ -1,8 +1,14 @@
 import WebSocket from "ws";
+import { readFileSync } from "fs";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import { messageTypes as action } from "../constants/constants.js";
 import Session from "../session/session.js";
 import Device from "../device/device.js";
 import { sleep } from "../utils/index.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 class WebSocketClient {
   constructor(url) {
@@ -16,7 +22,11 @@ class WebSocketClient {
     this.setupWebsocket();
   }
   setupWebsocket() {
-    this.webSocketClient = new WebSocket(this.url);
+    this.webSocketClient = new WebSocket(this.url, {
+      // key: readFileSync(new URL("../../certs/emr.test.key", import.meta.url)),
+      // cert: readFileSync(new URL("../../certs/emr.test.crt", import.meta.url)),
+      rejectUnauthorized: false, // TODO: remove in production
+    });
     this.setupEventListeners();
   }
   setupEventListeners() {
@@ -34,6 +44,7 @@ class WebSocketClient {
     this.reconnect();
   }
   handleError(error) {
+    console.log(error);
     console.log("Websocket connection failed: ", error.code);
   }
   async reconnect() {

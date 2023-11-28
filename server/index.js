@@ -4,6 +4,8 @@ import https from "https";
 import express from "express";
 import cors from "cors";
 import morgan from "morgan";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 import cookieParser from "cookie-parser";
 import Database from "./config/database.js";
 import authRoutes from "./route/authRoutes.js";
@@ -18,9 +20,12 @@ import WebSocketServer from "./websocket/websocketServer.js";
 
 dotenv.config();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 const serverOptions = {
-  key: fs.readFileSync("./certs/server.key"),
-  cert: fs.readFileSync("./certs/server.cert"),
+  key: fs.readFileSync(new URL("certs/emr.test.key", import.meta.url)),
+  cert: fs.readFileSync(new URL("certs/emr.test.crt", import.meta.url)),
 };
 
 const app = express();
