@@ -16,7 +16,7 @@ import { invalidPathHandler } from "./middleware/error/invalidPath.js";
 import { verifyToken } from "./middleware/auth/verifyToken.js";
 import { credentials } from "./middleware/auth/credentials.js";
 import { corsOptions } from "./config/corsOptions.js";
-import WebSocketServer from "./websocket/websocketServer.js";
+import WebSocketServer from "./websocket/webSocketServer.js";
 
 dotenv.config();
 

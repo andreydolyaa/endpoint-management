@@ -1,8 +1,11 @@
 import WebSocket from "ws";
-import { readFileSync } from "fs";
+// import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import { messageTypes as action } from "../constants/constants.js";
+import {
+  wsMessageTypes as action,
+  commandCenterMessageTypes as center,
+} from "../constants/constants.js";
 import Session from "../session/session.js";
 import Device from "../device/device.js";
 import { sleep } from "../utils/index.js";
@@ -74,6 +77,7 @@ class WebSocketClient {
   sendInitMessage() {
     this.send(
       JSON.stringify({
+        type: center.INITIAL_CONNECTION,
         device: Device.getDeviceIdentifier,
         sessionId: Session.retrieve,
       })
