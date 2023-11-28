@@ -11,10 +11,12 @@ import Auth from "./components/Auth";
 import Products from "./pages/Products/Products";
 import Settings from "./pages/Settings/Settings";
 import PersistUser from "./components/PersistUser";
+import Toast from "./components/Toast";
 
 function App() {
   return (
     <Provider store={store}>
+      <Toast />
       <Routes path="/" element={<Layout />}>
         {/* public */}
         <Route path="login" element={<Login />} />

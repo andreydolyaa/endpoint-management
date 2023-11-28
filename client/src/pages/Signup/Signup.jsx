@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearSignupError, signUp } from "../../redux/signup/signupActions";
 import { FiMail, FiLock, FiAlertCircle, FiUser } from "react-icons/fi";
+import { setToastMessage } from "../../redux/toast/toastActions";
 
 function Signup() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const error = useSelector((state) => state.signup.error);
+  const status = useSelector((state) => state.signup.status);
   const [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
@@ -15,6 +19,13 @@ function Signup() {
   useEffect(() => {
     dispatch(clearSignupError());
   }, [userDetails.email, userDetails.password, userDetails.name]);
+
+  useEffect(() => {
+    if (status?.success) {
+      navigate("/login");
+      dispatch(setToastMessage("Successfully Registered"));
+    }
+  }, [status]);
 
   const handleUserDetails = (e) => {
     const { name, value } = e.target;
@@ -84,7 +95,9 @@ function Signup() {
               <FiLock className="icon" />
             </div>
             <button className="button">Signup</button>
-            <a className="info-login" href="/login">Login</a>
+            <a className="info-login" href="/login">
+              Login
+            </a>
           </form>
         </div>
       </div>

@@ -22,7 +22,9 @@ export const handleSignUp = async (req, res) => {
     await newUser.save();
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
-    res.status(400).json({ message: "Failed to create user", error });
+    const message =
+      error?.code === 11000 ? "User already exists" : "Failed to create user";
+    res.status(400).json({ message, error });
   }
 };
 
