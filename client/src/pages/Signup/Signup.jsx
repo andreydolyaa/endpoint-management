@@ -23,7 +23,7 @@ function Signup() {
   useEffect(() => {
     if (status?.success) {
       navigate("/login");
-      dispatch(setToastMessage("Successfully Registered"));
+      dispatch(setToastMessage(status?.message));
     }
   }, [status]);
 

@@ -9,7 +9,7 @@ function Toast() {
     let timeout = null;
     if (message) {
       setShow(true);
-      timeout = setTimeout(() => setShow(false), 10000);
+      timeout = setTimeout(() => setShow(false), 8000);
     }
     return () => {
       clearTimeout(timeout);
