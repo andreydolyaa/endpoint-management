@@ -33,3 +33,10 @@ export const clearError = () => {
     payload: {},
   };
 };
+
+export const signOut = () => {
+  return {
+    type: actions.SIGN_OUT,
+    payload: {},
+  };
+};

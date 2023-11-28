@@ -37,6 +37,13 @@ const signinReducer = (state = initialState, action) => {
         ...state,
         user: payload.user,
       };
+    case actions.SIGN_OUT: 
+      return {
+        ...state,
+        user: null,
+        loading: false,
+        error: null
+      }
     case actions.CLEAR_ERROR:
       return {
         ...state,

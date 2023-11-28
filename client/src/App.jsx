@@ -10,24 +10,27 @@ import Missing from "./pages/Missing/Missing";
 import Auth from "./components/Auth";
 import Products from "./pages/Products/Products";
 import Settings from "./pages/Settings/Settings";
+import PersistUser from "./components/PersistUser";
 
 function App() {
   return (
     <Provider store={store}>
       <Routes path="/" element={<Layout />}>
-        {/* public routes */}
+        {/* public */}
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="unauthorized" element={<Unauthorized />} />
 
-        {/* protected routes */}
-        <Route element={<Auth />}>
-          <Route path="home" element={<Home />} />
-          <Route path="products" element={<Products />} />
-          <Route path="settings" element={<Settings />} />
+        {/* protected */}
+        <Route element={<PersistUser />}>
+          <Route element={<Auth />}>
+            <Route path="home" element={<Home />} />
+            <Route path="products" element={<Products />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
         </Route>
 
-        {/* wrong path */}
+        {/* bad path */}
         <Route path="*" element={<Missing />} />
       </Routes>
     </Provider>
