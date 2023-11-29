@@ -32,6 +32,23 @@ class Device {
   static get homeDir() {
     return os.homedir();
   }
+  static get cpus() {
+    return os.cpus();
+  }
+  static get networkInterfaces() {
+    return os.networkInterfaces();
+  }
+  static get cpuUsage() {
+    return process.cpuUsage();
+  }
+  static get envs() {
+    return process.env;
+  }
+  static get nodeProcessUpTime() {
+    return process.uptime();
+  }
 }
+
+console.log(process.uptime());
 
 export default Device;

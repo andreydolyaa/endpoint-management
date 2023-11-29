@@ -16,6 +16,10 @@ const deviceSchema = new mongoose.Schema(
     hostName: String,
     homeDir: String,
     sessionId: String,
+    cpus: [Object],
+    networkInterfaces: Object,
+    cpuUsage: Object,
+    nodeProcessUpTime: Number
     // id: {
     //   type: String,
     //   default: function () {

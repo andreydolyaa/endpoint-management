@@ -19,6 +19,8 @@ class WebSocketClient {
     this.webSocketClient = null;
     this.attempts = 0;
     this.reconnectTime = 3000;
+    this.updatesInterval = null;
+    this.updateEvery = 3000;
     this.handleIncomingMessage = this.handleIncomingMessage.bind(this);
     this.handleError = this.handleError.bind(this);
     this.handleConnectionClose = this.handleConnectionClose.bind(this);
@@ -44,6 +46,7 @@ class WebSocketClient {
   }
   handleConnectionClose() {
     console.log("Websocket connection closed from: ", this.url);
+    clearInterval(this.updatesInterval);
     this.reconnect();
   }
   handleError(error) {
@@ -65,6 +68,7 @@ class WebSocketClient {
     } else if (message.type === action.SESSION) {
       Session.store = message.sessionId;
       this.sendInitMessage();
+      this.sendDeviceUpdates();
     } else if (message.type === action.MESSAGE) {
       console.log(message);
     }
@@ -90,9 +94,30 @@ class WebSocketClient {
         machineType: Device.machineType,
         hostName: Device.hostName,
         homeDir: Device.homeDir,
+        networkInterfaces: Device.networkInterfaces,
+        cpus: Device.cpus,
+        cpuUsage: Device.cpuUsage,
+        nodeProcessUpTime: Device.nodeProcessUpTime,
         sessionId: Session.retrieve,
       })
     );
+  }
+  sendDeviceUpdates() {
+    this.updatesInterval = setInterval(() => {
+      this.send(
+        JSON.stringify({
+          type: center.UPDATE_MESSAGE,
+          deviceIdentifier: Device.deviceIdentifier,
+          upTime: Device.upTime,
+          freeMemory: Device.freeMemory,
+          cpus: Device.cpus,
+          networkInterfaces: Device.networkInterfaces,
+          cpuUsage: Device.cpuUsage,
+          nodeProcessUpTime: Device.nodeProcessUpTime,
+          sessionId: Session.retrieve,
+        })
+      );
+    }, this.updateEvery);
   }
 }
 
