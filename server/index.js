@@ -60,6 +60,7 @@ app.use(invalidPathHandler);
 process.on("SIGINT", async () => {
   try {
     await db.disconnect();
+    await wsServer.shut
     console.log("Disconnected from database");
     server.close(() => {
       console.log("HTTP server closed");

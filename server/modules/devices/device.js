@@ -4,6 +4,7 @@ import { wsServer } from "../../index.js";
 export const createNewDevice = async (device) => {
   const { deviceIdentifier, sessionId } = device;
   try {
+    device.connected = true;
     const options = { upsert: true, new: true, setDefaultsOnInsert: true };
     const foundDevice = await Device.findOneAndUpdate(
       { deviceIdentifier },
@@ -32,5 +33,13 @@ export const updateDevice = async (data) => {
       `Failed to update device in DB: ${error}`
     );
     return error;
+  }
+};
+
+export const setDisconnected = async (sessionId) => {
+  try {
+    return await Device.findOneAndUpdate({ sessionId }, { connected: false });
+  } catch (error) {
+    throw new Error(error);
   }
 };

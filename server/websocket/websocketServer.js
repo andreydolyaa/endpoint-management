@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { WebSocketServer } from "ws";
 import { webSocketActions as action } from "./webSocketConstants.js";
 import { handleIncomingWebSocketMessages } from "./webSocketIncomingMessages.js";
+import { setDisconnected } from "../modules/devices/device.js";
 
 class WsServer {
   constructor(server) {
@@ -48,10 +49,11 @@ class WsServer {
     socket.close();
     return;
   }
-  handleConnectionClose(socket) {
+  async handleConnectionClose(socket) {
     const sessionId = this.findSession(socket);
     delete this.clients[sessionId];
     this.logConnectionsStatus(sessionId, false);
+    await setDisconnected(sessionId);
   }
   findSession(socket) {
     for (const sessionId in this.clients) {

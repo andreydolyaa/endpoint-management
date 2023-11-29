@@ -47,6 +47,16 @@ class Device {
   static get nodeProcessUpTime() {
     return process.uptime();
   }
+  static get ipAddress() {
+    const interfaces = Device.networkInterfaces;
+    const ip = Object.values(interfaces)
+      .flat()
+      .find(
+        (networkInterface) =>
+          networkInterface.family === "IPv4" && !networkInterface.internal
+      ).address;
+    return ip;
+  }
 }
 
 console.log(process.uptime());
