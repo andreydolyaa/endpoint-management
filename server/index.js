@@ -9,6 +9,7 @@ import { dirname } from "path";
 import cookieParser from "cookie-parser";
 import Database from "./config/database.js";
 import authRoutes from "./route/authRoutes.js";
+import deviceRoutes from "./route/deviceRoutes.js";
 import productRoutes from "./route/productRoutes.js";
 import refreshTokenRoute from "./route/refreshTokenRoute.js";
 import { globalErrorHandler } from "./middleware/error/globalError.js";
@@ -50,6 +51,7 @@ app.use(cookieParser());
 app.use("/auth", authRoutes);
 app.use("/refresh", refreshTokenRoute);
 
+app.use("/devices", verifyToken, deviceRoutes);
 app.use("/products", verifyToken, productRoutes);
 
 app.use(globalErrorHandler);

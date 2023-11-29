@@ -23,7 +23,7 @@ export const login = (credentials) => {
 export const setNewUserAfterRefreshToken = (user) => {
   return {
     type: actions.SIGN_IN_SUCCESS,
-    payload: user,
+    payload: { user },
   };
 };
 

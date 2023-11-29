@@ -38,7 +38,9 @@ class WsServer {
       socket.close();
       return;
     }
-    console.log(`Incoming message from: ${incoming?.deviceIdentifier}`);
+    console.log(
+      `Incoming message from: ${incoming?.deviceIdentifier} [${incoming.sessionId}]`
+    );
     handleIncomingWebSocketMessages(incoming);
   }
   handleError(error) {

@@ -6,7 +6,6 @@ const initialState = {
   error: null,
 };
 
-
 const signinReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
@@ -21,7 +20,7 @@ const signinReducer = (state = initialState, action) => {
     case actions.SIGN_IN_SUCCESS:
       return {
         ...state,
-        user: payload.user,
+        user: payload?.user,
         loading: false,
         error: null,
       };
@@ -30,20 +29,20 @@ const signinReducer = (state = initialState, action) => {
         ...state,
         user: null,
         loading: false,
-        error: payload.error,
+        error: payload?.error,
       };
     case actions.REFRESH_TOKEN:
       return {
         ...state,
-        user: payload.user,
+        user: payload?.user,
       };
-    case actions.SIGN_OUT: 
+    case actions.SIGN_OUT:
       return {
         ...state,
         user: null,
         loading: false,
-        error: null
-      }
+        error: null,
+      };
     case actions.CLEAR_ERROR:
       return {
         ...state,
