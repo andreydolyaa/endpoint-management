@@ -3,7 +3,7 @@ import apiCallWithToken from "../../api/fetchPrivateData";
 
 export const getDevices = () => {
   return async (dispatch, getState) => {
-    dispatch({ type: actions.DEVICES_SUCCESS });
+    dispatch({ type: actions.DEVICES_REQUEST });
     const accessToken = getState().user?.user?.accessToken;
     try {
       const response = await apiCallWithToken(
@@ -13,7 +13,7 @@ export const getDevices = () => {
         accessToken
       );
       const devices = response?.data || [];
-      dispatch({ type: actions.DEVICES_SUCCESS, payload: { devices } });
+      dispatch({ type: actions.DEVICES_SUCCESS, payload: devices });
     } catch (error) {
       dispatch({ type: actions.DEVICES_FAILED, payload: error });
     }

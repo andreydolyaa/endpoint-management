@@ -29,7 +29,7 @@ const deviceReducer = (state = initialState, action) => {
         ...state,
         devices: [],
         loading: false,
-        error: payload.error,
+        error: payload?.error,
       };
     default:
       return state;
