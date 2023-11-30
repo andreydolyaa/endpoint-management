@@ -31,6 +31,18 @@ const deviceReducer = (state = initialState, action) => {
         loading: false,
         error: payload?.error,
       };
+    case "DEVICE_UPDATE":
+      const updatedDevices = state.devices.map((device) => {
+        if (device._id === payload._id) {
+          return { ...device, ...payload };
+        }
+        return device;
+      });
+
+      if (!state.devices.some((device) => device._id === payload._id)) {
+        updatedDevices.push(payload);
+      }
+      return { ...state, devices: updatedDevices };
     default:
       return state;
   }

@@ -20,7 +20,7 @@ class WebSocketClient {
     this.attempts = 0;
     this.reconnectTime = 3000;
     this.updatesInterval = null;
-    this.updateEvery = 3000;
+    this.updateEvery = 1000;
     this.handleIncomingMessage = this.handleIncomingMessage.bind(this);
     this.handleError = this.handleError.bind(this);
     this.handleConnectionClose = this.handleConnectionClose.bind(this);

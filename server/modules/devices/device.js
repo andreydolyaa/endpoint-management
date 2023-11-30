@@ -21,11 +21,16 @@ export const createNewDevice = async (device) => {
 export const updateDevice = async (data) => {
   const { deviceIdentifier } = data;
   try {
-    const update = await Device.findOneAndUpdate(
+    return await Device.findOneAndUpdate(
       { deviceIdentifier },
-      { ...data }
-    );
-    if (!update) throw new Error("Device not found");
+      { ...data },
+      { returnDocument: "after" }
+    )
+      .exec()
+      .then((result) => wsServer.sendToUi(result))
+      .catch(() => {
+        throw new Error("Device not found");
+      });
   } catch (error) {
     wsServer.sendMessage(
       data.sessionId,
@@ -37,7 +42,13 @@ export const updateDevice = async (data) => {
 
 export const setDisconnected = async (sessionId) => {
   try {
-    return await Device.findOneAndUpdate({ sessionId }, { connected: false });
+    return await Device.findOneAndUpdate(
+      { sessionId },
+      { connected: false },
+      { returnDocument: "after" }
+    )
+      .exec()
+      .then((result) => wsServer.sendToUi(result));
   } catch (error) {
     throw new Error(error);
   }

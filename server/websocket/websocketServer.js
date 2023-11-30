@@ -10,14 +10,18 @@ class WsServer {
     this.wss = new WebSocketServer({ server, path: "/ws" });
     this.setupWebSocket();
     this.clients = {};
+    this.UIsocket = {};
   }
   setupWebSocket() {
     console.log("Websocket server started");
-    this.wss.on(action.CONNECTION, (socket) => {
-      this.handleConnectionOpen(socket);
-      socket.on(action.MESSAGE, (message) =>
-        this.handleIncomingMessage(message, socket)
-      );
+    this.wss.on(action.CONNECTION, (socket, request) => {
+      const urlParams = new URLSearchParams(request.url?.split("?")[1]);
+      const param = urlParams.get("identifier");
+      if (param === "UI") this.UIsocket = socket;
+      else this.handleConnectionOpen(socket);
+      socket.on(action.MESSAGE, (message) => {
+        this.handleIncomingMessage(message, socket);
+      });
       socket.on(action.ERROR, (error) => this.handleError(error, socket));
       socket.on(action.CLOSE, () => this.handleConnectionClose(socket));
     });
@@ -79,6 +83,13 @@ class WsServer {
     const msg = JSON.stringify({ type: "message", message });
     const socket = this.clients[sessionId];
     socket.send(msg);
+  }
+
+  sendToUi(message) {
+    const msg = JSON.stringify({ type: "DEVICE_UPDATE", data: message });
+    if (Object.keys(this.UIsocket).length > 0) {
+      this.UIsocket.send(msg);
+    }
   }
 }
 

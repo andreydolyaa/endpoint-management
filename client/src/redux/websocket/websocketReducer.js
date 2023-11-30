@@ -1,4 +1,4 @@
-import * as wsType from "./webSocketTypes";
+import * as types from "./webSocketTypes";
 
 const initialState = {
   messages: [],
@@ -9,13 +9,11 @@ const websocketReducer = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case wsType.WEBSOCKET_MESSAGE_RECEIVED:
-      console.log(payload, "Message Received: Payload: ", payload);
-
-    case wsType.WEBSOCKET_CONNECTED:
-      console.log("XXXXXXXXXXXXX");
+    case types.WEBSOCKET_MESSAGE_RECEIVED:
+      console.log("Message Received: Payload: ", payload);
+    case types.WEBSOCKET_CONNECTED:
       return { ...state, isConnected: true };
-    case wsType.WEBSOCKET_DISCONNECTED:
+    case types.WEBSOCKET_DISCONNECTED:
       return { ...state, isConnected: false };
     default:
       return state;

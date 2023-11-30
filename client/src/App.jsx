@@ -15,7 +15,7 @@ import Toast from "./components/Toast";
 import RedirectAuthenticated from "./components/RedirectAuthenticated";
 import { connectWebSocket } from "./redux/websocket/websocketActions";
 
-store.dispatch(connectWebSocket())
+store.dispatch(connectWebSocket());
 
 function App() {
   return (
