@@ -13,6 +13,7 @@ import Settings from "./pages/Settings/Settings";
 import PersistUser from "./components/PersistUser";
 import Toast from "./components/Toast";
 import RedirectAuthenticated from "./components/RedirectAuthenticated";
+
 function App() {
   return (
     <Provider store={store}>

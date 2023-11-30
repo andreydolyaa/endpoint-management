@@ -3,6 +3,7 @@ import { WebSocketServer } from "ws";
 import { webSocketActions as action } from "./webSocketConstants.js";
 import { handleIncomingWebSocketMessages } from "./webSocketIncomingMessages.js";
 import { setDisconnected } from "../modules/devices/device.js";
+import { praseJsonString } from "../utils/index.js";
 
 class WsServer {
   constructor(server) {
@@ -28,7 +29,7 @@ class WsServer {
     this.send(socket, { type: "session", sessionId });
   }
   handleIncomingMessage(message, socket) {
-    const incoming = JSON.parse(message);
+    const incoming = praseJsonString(message);
     const sessions = Object.keys(this.clients) || [];
     // TODO: handle message validation and sanitazation
     if (!incoming.sessionId || !sessions.includes(incoming.sessionId)) {

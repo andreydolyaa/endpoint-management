@@ -1,6 +1,6 @@
 export const sleep = (ms) => {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
 
 export const generateUserForJwt = (user) => {
   return {
@@ -9,4 +9,12 @@ export const generateUserForJwt = (user) => {
     email: user.email,
     role: user.role,
   };
+};
+
+export const praseJsonString = (jsonStr) => {
+  try {
+    return JSON.parse(jsonStr);
+  } catch (error) {
+    return "Failed to parse JSON";
+  }
 };

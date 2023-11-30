@@ -99,6 +99,7 @@ class WebSocketClient {
         cpuUsage: Device.cpuUsage,
         nodeProcessUpTime: Device.nodeProcessUpTime,
         ipAddress: Device.ipAddress,
+        connected: true,
         sessionId: Session.retrieve,
       })
     );

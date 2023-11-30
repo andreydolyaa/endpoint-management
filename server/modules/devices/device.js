@@ -4,7 +4,6 @@ import { wsServer } from "../../index.js";
 export const createNewDevice = async (device) => {
   const { deviceIdentifier, sessionId } = device;
   try {
-    device.connected = true;
     const options = { upsert: true, new: true, setDefaultsOnInsert: true };
     const foundDevice = await Device.findOneAndUpdate(
       { deviceIdentifier },
