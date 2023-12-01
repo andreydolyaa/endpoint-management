@@ -8,14 +8,10 @@ import Home from "./pages/Home/Home";
 import Unauthorized from "./pages/Unauthorized/Unauthorized";
 import Missing from "./pages/Missing/Missing";
 import Auth from "./components/Auth";
-import Products from "./pages/Products/Products";
 import Settings from "./pages/Settings/Settings";
 import PersistUser from "./components/PersistUser";
 import Toast from "./components/Toast";
 import RedirectAuthenticated from "./components/RedirectAuthenticated";
-import { connectWebSocket } from "./redux/websocket/websocketActions";
-
-store.dispatch(connectWebSocket());
 
 function App() {
   return (
@@ -33,7 +29,6 @@ function App() {
           {/* protected */}
           <Route element={<Auth />}>
             <Route path="home" element={<Home />} />
-            <Route path="products" element={<Products />} />
             <Route path="settings" element={<Settings />} />
           </Route>
         </Route>

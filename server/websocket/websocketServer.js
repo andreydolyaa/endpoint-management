@@ -60,6 +60,14 @@ class WsServer {
     this.logConnectionsStatus(sessionId, false);
     await setDisconnected(sessionId);
   }
+  terminateConnectionsAndServer() {
+    this.wss.clients.forEach((client) => {
+      client.terminate();
+    });
+    this.wss.close(() => {
+      process.exit();
+    });
+  }
   findSession(socket) {
     for (const sessionId in this.clients) {
       if (this.clients[sessionId] === socket) return sessionId;

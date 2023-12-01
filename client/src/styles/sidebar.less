@@ -1,0 +1,50 @@
+.side-bar {
+  background-color: var(--card);
+  overflow-y: auto;
+  .container {
+    height: 100%;
+    padding: 0 25px;
+    .device-item {
+      height: 80px;
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .ip {
+          font-family: monospace;
+          font-size: 14px;
+        }
+        .online {
+          width: 10px;
+          height: 10px;
+          border-radius: 50px;
+          background-color: rgb(0, 255, 94);
+          animation: heartbeat 1s ease-in-out infinite;
+        }
+        .offline {
+          width: 10px;
+          height: 10px;
+          border-radius: 50px;
+          background-color: rgb(255, 81, 81);
+        }
+      }
+      .identifier {
+        margin: 5px 0 0 0;
+        font-size: 12px;
+        color: var(--font-secondary);
+      }
+    }
+  }
+}
+
+@keyframes heartbeat {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}

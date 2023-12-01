@@ -58,10 +58,12 @@ app.use(globalErrorHandler);
 app.use(invalidPathHandler);
 
 process.on("SIGINT", async () => {
+  console.log("SIGINT");
   try {
     await db.disconnect();
-    await wsServer.shut
+    wsServer.terminateConnectionsAndServer();
     console.log("Disconnected from database");
+    console.log("Websocket server terminated");
     server.close(() => {
       console.log("HTTP server closed");
       process.exit(0);
