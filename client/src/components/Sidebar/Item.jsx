@@ -23,7 +23,7 @@ const Item = ({ linkName }) => {
     <div className="">
       <NavLink
         to={linkName}
-        className="capitalize h-12 px-5 mb-2 group rounded-lg text-[14px] text-gray-500 sidebar-item transition duration-300 flex items-center cursor-pointer hover:bg-indigo-500  hover:bg-opacity-20 hover:text-white group-hover:text-white"
+        className="capitalize h-12 px-5 mb-2 group rounded-lg text-[14px] sidebar-item transition duration-300 flex items-center cursor-pointer hover:bg-indigo-400  hover:bg-opacity-20"
       >
         <IconComponent className="icon mr-3" />
         <span>{linkName}</span>

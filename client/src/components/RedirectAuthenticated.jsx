@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 const RedirectAuthenticated = () => {
   const { auth } = useAuth();
 
-  return Object.keys(auth).length > 0 ? <Navigate to="/home" /> : <Outlet />;
+  return Object.keys(auth).length > 0 ? <Navigate to="/home/devices" /> : <Outlet />;
 };
 
 export default RedirectAuthenticated;

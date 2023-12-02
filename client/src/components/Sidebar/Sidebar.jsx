@@ -1,11 +1,10 @@
-import Logo from "../Logo";
+
 import Item from "./Item";
 import Title from "./Title";
 
 const Sidebar = () => {
   return (
     <div className="sidebar px-4">
-      <Logo />
       <Title title={"Management"} />
       <Item linkName={"devices"} />
       <Item linkName={"response"} />

@@ -23,10 +23,12 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home">
-      <TopBar />
-      <SideBar />
-      <Main />
+    <div className="home overflow-y-auto">
+      <div className="wrapper ">
+        <TopBar />
+        <SideBar />
+        <Main />
+      </div>
     </div>
   );
 };

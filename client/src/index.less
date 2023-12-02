@@ -7,20 +7,19 @@
 @import "./styles/toast.less";
 
 :root {
-  --background: #1a1b20;
-  --background-secondary: #21242b;
-  --card: #21242b;
-  --font: #ffffff;
-  --font-secondary: #8c8d90;
+  --background: #1e1e2b;
+  --card: #28293d;
+  --shadow: #191924;
+  // --font: #ffffff;
+  // --font-secondary: #8c8d90;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  // font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   letter-spacing: 0.4px;
-  font-family: "Ubuntu", monospace;
+  font-family: Ubuntu, Inter, monospace;
 }
 
 html,
@@ -79,36 +78,72 @@ input:-webkit-autofill {
 }
 
 .home {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-template-rows: 76px 1fr;
-  grid-template-areas:
-    "sidebar topbar"
-    "sidebar main";
-  transition: 0.3s;
-  color: white;
-  .sidebar {
-    grid-area: sidebar;
-    background-color: var(--background);
-  }
-  .topbar {
-    grid-area: topbar;
-    background-color: var(--background);
-  }
-  .main {
-    grid-area: main;
-    background-color: var(--background);
+  height: 100vh;
+  background-color: var(--background);
+  overflow: auto;
+  .wrapper {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas:
+      "topbar topbar"
+      "sidebar main";
+    transition: 0.3s;
+    color: white;
+    // gap: 20px;
+    // padding: 20px;
+    .sidebar {
+      grid-area: sidebar;
+      // margin:0 20px 20px 20px;
+      height: 100vh;
+      transition: 0.3s;
+      // width:100%;
+      width: 280px;
+      position: fixed;
+      top: 60px;
+      // margin:20px;
+      // border-radius: 10px;
+      // box-shadow: 0px 0px 30px var(--shadow);
+      background: rgb(54, 41, 97);
+      background: linear-gradient(
+        150deg,
+        rgba(54, 41, 97, 1) 0%,
+        rgba(64, 45, 126, 1) 59%,
+        rgba(73, 22, 142, 1) 100%
+      );
+    }
+
+    .topbar {
+      grid-area: topbar;
+      background-color: var(--background);
+      // background-color: red;
+      height: 60px;
+      // width: 100%;
+      position: fixed;
+      right: 0px;
+      left: 0;
+      top: 0;
+      // z-index: 10000
+    }
+    .main {
+      grid-area: main;
+      background-color: var(--card);
+    }
   }
 }
 
 .active {
-  background-color: rgba(99, 102, 241, 0.2);
-  color: #fff;
+  background-color: rgba(129, 140, 248, 0.2);
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1000px) {
   .home {
-    grid-template-columns: 80px 1fr;
+    .wrapper {
+      grid-template-columns: 80px 1fr;
+      .sidebar {
+        width: 80px;
+      }
+    }
   }
 }
