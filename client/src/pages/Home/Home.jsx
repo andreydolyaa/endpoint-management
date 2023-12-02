@@ -23,7 +23,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home overflow-y-auto">
+    <div className="home">
       <div className="wrapper ">
         <TopBar />
         <SideBar />

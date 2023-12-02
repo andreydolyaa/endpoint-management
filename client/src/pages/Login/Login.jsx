@@ -24,7 +24,7 @@ function Login() {
     emailRef.current.focus();
     if (user) {
       setAuth(user);
-      navigate("/home");
+      navigate("/home/devices");
     }
   }, [user]);
 
