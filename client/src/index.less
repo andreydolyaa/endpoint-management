@@ -1,17 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "./styles/auth.less";
 @import "./styles/toast.less";
-@import "./styles/topbar.less";
-@import "./styles/sidebar.less";
-@import "./styles/home.less";
-@import "./styles/main.less";
 
 :root {
-  --background: #1e1e2e;
-  --topbar: #071528;
-  --card: #28293d;
-  --font: #efefef;
-  --font-secondary: rgb(159, 159, 159);
-  --sidebar: red;
+  --background: #1a1b20;
+  --background-secondary: #21242b;
+  --card: #21242b;
+  --font: #ffffff;
+  --font-secondary: #8c8d90;
 }
 
 * {
@@ -72,29 +71,37 @@ input:-webkit-autofill {
   animation: spin 2s linear infinite;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-  max-height: 120px;
-  // border-bottom:1px solid var(--background);
-  h1 {
-    font-size: 42px;
-    span {
-      color: red;
-    }
-  }
-}
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.icon {
+  width: 18px;
+  height: 18px;
 }
 
-.icon1 {
-  width: 22px;
-  height: 22px;
-  color:rgb(145, 145, 145);
+.home {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 56px 1fr;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar main";
+  transition: 0.3s;
+  color: white;
+  .sidebar {
+    grid-area: sidebar;
+    background-color: var(--background);
+  }
+  .topbar {
+    grid-area: topbar;
+    background-color: var(--background);
+  }
+  .main {
+    grid-area: main;
+    background-color: var(--background);
+  }
+}
+
+@media (max-width: 760px) {
+  .home {
+    grid-template-columns: 80px 1fr;
+  }
 }

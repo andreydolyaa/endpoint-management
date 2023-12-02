@@ -12,6 +12,9 @@ import Settings from "./pages/Settings/Settings";
 import PersistUser from "./components/PersistUser";
 import Toast from "./components/Toast";
 import RedirectAuthenticated from "./components/RedirectAuthenticated";
+import Devices from "./pages/Devices/Devices";
+import Response from "./pages/Response/Response";
+import Data from "./pages/Data/Data";
 
 function App() {
   return (
@@ -28,7 +31,11 @@ function App() {
 
           {/* protected */}
           <Route element={<Auth />}>
-            <Route path="home" element={<Home />} />
+            <Route path="home" element={<Home />}>
+              <Route path="devices" element={<Devices />} />
+              <Route path="response" element={<Response />} />
+              <Route path="data" element={<Data />} />
+            </Route>
             <Route path="settings" element={<Settings />} />
           </Route>
         </Route>

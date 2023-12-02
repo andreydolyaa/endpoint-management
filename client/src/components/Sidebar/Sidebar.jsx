@@ -1,18 +1,18 @@
-
 import Logo from "../Logo";
 import Item from "./Item";
+import Title from "./Title";
 
-const Sidebar = ({ devices }) => {
-  console.log(devices);
+const Sidebar = () => {
   return (
-    <div className="side-bar">
-      <div className="container">
-        <Logo />
-        {devices.length > 0 &&
-          devices.map((device) => {
-            return <Item key={device._id} device={device} />;
-          })}
-      </div>
+    <div className="sidebar px-4">
+      <Logo />
+      <Title title={"Management"} />
+      <Item linkName={"devices"} />
+      <Item linkName={"response"} />
+      <Item linkName={"data"} />
+      <Title title={"System"} />
+      <Item linkName={"settings"} />
+      <Item linkName={"logout"} />
     </div>
   );
 };
