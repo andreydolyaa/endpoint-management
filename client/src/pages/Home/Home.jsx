@@ -22,25 +22,11 @@ const Home = () => {
     };
   }, []);
 
-  const sortByConnection = (a, b) => {
-    return b.connected - a.connected;
-  };
   return (
-    // <div className="h-full grid grid-rows-13 grid-cols-12">
-    //   <div className="border row-start-1 row-end-2 col-start-3 col-span-full">
-    //     <TopBar />
-    //   </div>
-    //   <div className="border border-blue-400 row-start-1 row-end-13 col-start-1 col-end-3">
-    //     <SideBar />
-    //   </div>
-    //   <div className="border border-red-400 row-start-2 row-end-13 col-start-3 col-end-13">
-    //     <Main />
-    //   </div>
-    // </div>
     <div className="home">
-        <TopBar />
-        <SideBar />
-        <Main />
+      <TopBar />
+      <SideBar />
+      <Main />
     </div>
   );
 };

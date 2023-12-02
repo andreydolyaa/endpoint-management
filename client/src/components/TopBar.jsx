@@ -8,12 +8,15 @@
 //   );
 // }
 
+import Logout from "./Logout";
+
 // export default TopBar;
 
 const TopBar = () => {
   return (
     <div className="topbar border border-emerald-500">
       topbar
+      <Logout/>
     </div>
   );
 };

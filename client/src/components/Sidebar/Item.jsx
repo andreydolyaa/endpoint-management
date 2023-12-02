@@ -21,13 +21,13 @@ const Item = ({ linkName }) => {
 
   return (
     <div className="">
-      <Link
+      <NavLink
         to={linkName}
-        className="capitalize group rounded-lg text-[14px] text-gray-400 sidebar-item px-5 transition duration-300 flex items-center h-14 cursor-pointer hover:bg-indigo-500  hover:bg-opacity-10 hover:text-white group-hover:text-white"
+        className="capitalize h-12 px-5 mb-2 group rounded-lg text-[14px] text-gray-500 sidebar-item transition duration-300 flex items-center cursor-pointer hover:bg-indigo-500  hover:bg-opacity-20 hover:text-white group-hover:text-white"
       >
-        <IconComponent className="icon mr-4" />
+        <IconComponent className="icon mr-3" />
         <span>{linkName}</span>
-      </Link>
+      </NavLink>
     </div>
   );
 };
