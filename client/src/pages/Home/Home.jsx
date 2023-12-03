@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import TopBar from "../../components/TopBar";
 import SideBar from "../../components/Sidebar/Sidebar";
 import store from "../../redux/store";
@@ -10,8 +9,6 @@ import {
 import Main from "../../components/Main";
 
 const Home = () => {
-  const dispatch = useDispatch();
-
   useEffect(() => {
     store.dispatch(connectWebSocket());
     return () => {

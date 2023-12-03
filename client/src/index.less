@@ -6,6 +6,8 @@
 @import "./styles/auth.less";
 @import "./styles/toast.less";
 
+@import 'react-tooltip/dist/react-tooltip.css';
+
 :root {
   --background: #f5f6f7;
   --card: #ffffff;
@@ -81,6 +83,18 @@ input:-webkit-autofill {
   animation: spin 2s linear infinite;
 }
 
+@keyframes heartbeat {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
 .icon {
   width: 18px;
   height: 18px;
@@ -132,7 +146,6 @@ input:-webkit-autofill {
   gap: 30px;
   padding: 30px;
   .card {
-
   }
 }
 
