@@ -5,7 +5,7 @@ const Logout = () => {
   const signout = useLogout();
   return (
     <button onClick={signout}>
-      <RiLogoutCircleRLine style={{ width: "22px", height: "22px" }} />
+      <RiLogoutCircleRLine style={{ width: "18px", height: "18px" }} />
     </button>
   );
 };

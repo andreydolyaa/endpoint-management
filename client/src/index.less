@@ -2,16 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Ubuntu:wght@400;500;700&display=swap");
 @import "./styles/auth.less";
 @import "./styles/toast.less";
 
 :root {
-  --background: #1e1e2b;
-  --card: #28293d;
+  --background: #f5f6f7;
+  --card: #ffffff;
   --shadow: #191924;
-  // --font: #ffffff;
-  // --font-secondary: #8c8d90;
+  --sidebar: rgb(23, 26, 29);
+  --border: gray;
+}
+
+@layer components {
+  .centered-min-data {
+    @apply h-full text-gray-400 flex flex-col items-center justify-center;
+  }
+  .centered-min-text {
+    @apply text-gray-500 text-xs font-medium uppercase;
+  }
 }
 
 * {
@@ -19,13 +28,13 @@
   padding: 0;
   box-sizing: border-box;
   letter-spacing: 0.4px;
-  font-family: Ubuntu, Inter, monospace;
 }
 
 html,
 body,
 #root {
   height: 100%;
+  font-family: Inter, monospace;
 }
 
 a {
@@ -80,69 +89,67 @@ input:-webkit-autofill {
 .home {
   height: 100vh;
   background-color: var(--background);
-  // overflow: auto;
   .wrapper {
     height: 100%;
     display: grid;
     grid-template-columns: 280px 1fr;
     grid-template-rows: 60px 1fr;
     grid-template-areas:
-      "topbar topbar"
+      "sidebar topbar"
       "sidebar main";
     transition: 0.3s;
     color: white;
-    // gap: 20px;
-    // padding: 20px;
     .sidebar {
+      font-family: Ubuntu !important;
       grid-area: sidebar;
-      // margin:0 20px 20px 20px;
       height: 100vh;
       transition: 0.3s;
-      // width:100%;
       width: 280px;
       position: fixed;
-      top: 60px;
-      // margin:20px;
-      // border-radius: 10px;
-      // box-shadow: 0px 0px 30px var(--shadow);
-      background: rgb(54, 41, 97);
-      background: linear-gradient(
-        150deg,
-        rgba(54, 41, 97, 1) 0%,
-        rgba(64, 45, 126, 1) 59%,
-        rgba(73, 22, 142, 1) 100%
-      );
+      background-color: var(--sidebar);
     }
 
     .topbar {
       grid-area: topbar;
-      background-color: var(--background);
-      // background-color: red;
+      background-color: white;
       height: 60px;
-      // width: 100%;
       position: fixed;
       right: 0px;
-      left: 0;
+      left: 280px;
       top: 0;
-      // z-index: 10000
+      transition: 0.3s;
     }
     .main {
       grid-area: main;
-      background-color: var(--card);
+      background-color: var(--background);
     }
   }
 }
 
-.active {
-  background-color: rgba(129, 140, 248, 0.2);
+.devices-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 30px;
+  .card {
+
+  }
 }
 
-@media (max-width: 1000px) {
+.active {
+  background-color: rgba(156, 163, 175, 0.1);
+  color: white;
+}
+
+@media (max-width: 1023px) {
   .home {
     .wrapper {
-      grid-template-columns: 80px 1fr;
+      grid-template-columns: 70px 1fr;
       .sidebar {
-        width: 80px;
+        width: 70px;
+      }
+      .topbar {
+        left: 70px;
       }
     }
   }

@@ -1,5 +1,9 @@
 const Title = ({ title }) => {
-  return <p className="my-7 px-5 text-[14px] font-medium text-gray-500">{title}</p>;
+  return (
+    <div className="hidden lg:block whitespace-nowrap mt-7 mb-6 px-5 text-[12px] text-gray-500">
+      {title}
+    </div>
+  );
 };
 
 export default Title;
