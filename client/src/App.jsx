@@ -21,7 +21,7 @@ function App() {
   return (
     <Provider store={store}>
       <Toast />
-      <Tooltip id="tooltip" />
+      <Tooltip id="tooltip" style={{ fontSize: "12px" }} />
       <Routes path="/" element={<Layout />}>
         <Route element={<PersistUser />}>
           {/* public */}
