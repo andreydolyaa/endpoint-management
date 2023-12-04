@@ -99,6 +99,8 @@ class WebSocketClient {
         cpuUsage: Device.cpuUsage,
         nodeProcessUpTime: Device.nodeProcessUpTime,
         ipAddress: Device.ipAddress,
+        systemLoad: Device.systemLoad,
+        cpuUsageCalculated: Device.cpuUsageCalculated,
         connected: true,
         sessionId: Session.retrieve,
       })
@@ -116,6 +118,8 @@ class WebSocketClient {
           networkInterfaces: Device.networkInterfaces,
           cpuUsage: Device.cpuUsage,
           nodeProcessUpTime: Device.nodeProcessUpTime,
+          systemLoad: Device.systemLoad,
+          cpuUsageCalculated: Device.cpuUsageCalculated,
           sessionId: Session.retrieve,
         })
       );

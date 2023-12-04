@@ -21,7 +21,9 @@ const deviceSchema = new mongoose.Schema(
     cpuUsage: Object,
     nodeProcessUpTime: Number,
     ipAddress: String,
-    connected: Boolean
+    connected: Boolean,
+    systemLoad: [Number],
+    cpuUsageCalculated: [Number],
     // id: {
     //   type: String,
     //   default: function () {

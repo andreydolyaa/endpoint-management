@@ -47,6 +47,17 @@ class Device {
   static get nodeProcessUpTime() {
     return process.uptime();
   }
+  static get systemLoad() {
+    return os.loadavg();
+  }
+  static get cpuUsageCalculated() {
+    return Device.cpus.map((core) => {
+      const total =
+        core.times.user + core.times.nice + core.times.sys + core.times.idle;
+      const idle = core.times.idle;
+      return 100 - (idle / total) * 100;
+    });
+  }
   static get ipAddress() {
     const interfaces = Device.networkInterfaces;
     const ip = Object.values(interfaces)
@@ -58,7 +69,5 @@ class Device {
     return ip;
   }
 }
-
-console.log(process.uptime());
 
 export default Device;
